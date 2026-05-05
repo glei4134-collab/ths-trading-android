@@ -40,7 +40,7 @@
                 android:id="@+id/serverInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="http://192.168.1.209:5000"
+                android:text="http://100.122.253.96:5000"
                 android:textColor="#e6edf3"
                 android:textColorHint="#8b949e"
                 android:inputType="textUri" />

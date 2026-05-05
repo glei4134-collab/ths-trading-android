@@ -17,7 +17,7 @@
 
         <EditText android:id="@+id/chatInput" android:layout_width="0dp"
             android:layout_height="44dp" android:layout_weight="1"
-            android:background="@drawable/bg_card" android:hint="输入消息..."
+            android:background="#2216213e" android:hint="输入消息..."
             android:textColor="#e6edf3" android:textColorHint="#8b949e"
             android:paddingHorizontal="14dp" android:singleLine="true"
             android:imeOptions="actionSend" android:inputType="text" />

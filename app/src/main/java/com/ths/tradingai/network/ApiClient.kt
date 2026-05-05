@@ -143,4 +143,26 @@ object ApiClient {
             false
         }
     }
+
+    fun toggleScheduler(server: String, token: String): ApiResponse<Map<String, Boolean>> {
+        val body = "{}".toRequestBody("application/json".toMediaType())
+        val request = Request.Builder()
+            .url("$server/api/mobile/scheduler/toggle")
+            .addHeader("Authorization", "Bearer $token")
+            .post(body)
+            .build()
+        val response = client.newCall(request).execute()
+        return gson.fromJson(response.body?.string(), object : com.google.gson.reflect.TypeToken<ApiResponse<Map<String, Boolean>>>() {}.type)
+    }
+
+    fun toggleAutoTrade(server: String, token: String): ApiResponse<Map<String, Boolean>> {
+        val body = "{}".toRequestBody("application/json".toMediaType())
+        val request = Request.Builder()
+            .url("$server/api/mobile/auto-trade/toggle")
+            .addHeader("Authorization", "Bearer $token")
+            .post(body)
+            .build()
+        val response = client.newCall(request).execute()
+        return gson.fromJson(response.body?.string(), object : com.google.gson.reflect.TypeToken<ApiResponse<Map<String, Boolean>>>() {}.type)
+    }
 }

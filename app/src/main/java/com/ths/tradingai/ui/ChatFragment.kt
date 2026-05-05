@@ -1,5 +1,6 @@
 package com.ths.tradingai.ui
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,8 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.ths.tradingai.R
 import com.ths.tradingai.network.ApiClient
 import com.ths.tradingai.util.TokenManager
@@ -28,6 +31,7 @@ class ChatFragment : Fragment() {
     private val messages = mutableListOf<ChatMessage>()
     private val chatHistory = mutableListOf<Map<String, String>>()
     private lateinit var adapter: ChatAdapter
+    private val gson = Gson()
 
     data class ChatMessage(val role: String, val content: String, val time: String)
 
@@ -42,12 +46,17 @@ class ChatFragment : Fragment() {
         chatInput = view.findViewById(R.id.chatInput)
         sendButton = view.findViewById(R.id.sendButton)
 
-        chatMessages.layoutManager = LinearLayoutManager(requireContext())
         adapter = ChatAdapter(messages)
+        chatMessages.layoutManager = LinearLayoutManager(requireContext())
         chatMessages.adapter = adapter
 
-        // 欢迎消息
-        addMessage("bot", "你好！我是AI交易助手。可以问我股票分析、市场行情，或输入交易指令。")
+        // 加载本地聊天记录
+        loadHistory()
+
+        // 如果没有历史记录，添加欢迎消息
+        if (messages.isEmpty()) {
+            addMessage("bot", "你好！我是AI交易助手。可以问我股票分析、市场行情，或输入交易指令。")
+        }
 
         sendButton.setOnClickListener { sendChat() }
     }
@@ -75,6 +84,7 @@ class ChatFragment : Fragment() {
                         if (chatHistory.size > 40) {
                             chatHistory.subList(0, chatHistory.size - 40).clear()
                         }
+                        saveHistory()
                     } else {
                         addMessage("bot", "❌ ${result.message ?: "请求失败"}")
                     }
@@ -93,6 +103,40 @@ class ChatFragment : Fragment() {
         messages.add(ChatMessage(role, content, time))
         adapter.notifyItemInserted(messages.size - 1)
         chatMessages.scrollToPosition(messages.size - 1)
+    }
+
+    private fun saveHistory() {
+        try {
+            val prefs = requireContext().getSharedPreferences("chat_prefs", Context.MODE_PRIVATE)
+            prefs.edit()
+                .putString("messages", gson.toJson(messages))
+                .putString("history", gson.toJson(chatHistory))
+                .apply()
+        } catch (e: Exception) {}
+    }
+
+    private fun loadHistory() {
+        try {
+            val prefs = requireContext().getSharedPreferences("chat_prefs", Context.MODE_PRIVATE)
+            val msgJson = prefs.getString("messages", null)
+            val histJson = prefs.getString("history", null)
+            if (msgJson != null) {
+                val type = object : TypeToken<List<ChatMessage>>() {}.type
+                val saved: List<ChatMessage> = gson.fromJson(msgJson, type)
+                messages.addAll(saved)
+                adapter.notifyDataSetChanged()
+            }
+            if (histJson != null) {
+                val type = object : TypeToken<List<Map<String, String>>>() {}.type
+                val saved: List<Map<String, String>> = gson.fromJson(histJson, type)
+                chatHistory.addAll(saved)
+            }
+        } catch (e: Exception) {}
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        saveHistory()
     }
 }
 
