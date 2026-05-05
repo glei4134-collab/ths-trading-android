@@ -2,6 +2,13 @@
 
 同花顺模拟比赛AI交易系统 - Android 原生客户端
 
+## 相关仓库
+
+| 仓库 | 说明 |
+|------|------|
+| [ths-trading-ai](https://github.com/glei4134-collab/ths-trading-ai) | 电脑端（Flask服务器） |
+| [ths-cookie-keeper](https://github.com/glei4134-collab/ths-cookie-keeper) | 云端（续签+爬取+交易） |
+
 ## 功能
 
 - 🔐 二维码/绑定码绑定电脑端
