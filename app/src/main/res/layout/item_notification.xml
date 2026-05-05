@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:orientation="horizontal" android:layout_marginBottom="8dp">
+    <View android:id="@+id/notifCard" android:layout_width="4dp" android:layout_height="match_parent"
+        android:background="#667eea" android:layout_marginEnd="10dp" />
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="vertical" android:background="@drawable/bg_card" android:padding="12dp">
+        <TextView android:id="@+id/notifTitle" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:textColor="#e6edf3"
+            android:textSize="13sp" android:textStyle="bold" />
+        <TextView android:id="@+id/notifMessage" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:textColor="#8b949e"
+            android:textSize="11sp" android:layout_marginTop="3dp" android:maxLines="3" />
+        <TextView android:id="@+id/notifTime" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:textColor="#555555"
+            android:textSize="10sp" android:layout_marginTop="4dp" />
+    </LinearLayout>
+</LinearLayout>

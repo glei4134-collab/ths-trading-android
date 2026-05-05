@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical" android:background="#0f1923">
+
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:text="AI 聊天" android:textColor="#e6edf3" android:textSize="18sp"
+        android:textStyle="bold" android:padding="16dp" android:background="#16213e" />
+
+    <androidx.recyclerview.widget.RecyclerView android:id="@+id/chatMessages"
+        android:layout_width="match_parent" android:layout_height="0dp"
+        android:layout_weight="1" android:padding="12dp" android:clipToPadding="false" />
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="horizontal" android:padding="8dp"
+        android:background="#16213e" android:gravity="center_vertical">
+
+        <EditText android:id="@+id/chatInput" android:layout_width="0dp"
+            android:layout_height="44dp" android:layout_weight="1"
+            android:background="@drawable/bg_card" android:hint="输入消息..."
+            android:textColor="#e6edf3" android:textColorHint="#8b949e"
+            android:paddingHorizontal="14dp" android:singleLine="true"
+            android:imeOptions="actionSend" android:inputType="text" />
+
+        <ImageButton android:id="@+id/sendButton" android:layout_width="44dp"
+            android:layout_height="44dp" android:src="@android:drawable/ic_menu_send"
+            android:background="@color/accent" android:padding="10dp"
+            android:layout_marginStart="8dp" android:scaleType="centerInside"
+            android:backgroundTint="#667eea" android:contentDescription="发送" />
+    </LinearLayout>
+</LinearLayout>

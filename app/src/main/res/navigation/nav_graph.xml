@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/accountFragment">
+
+    <fragment
+        android:id="@+id/bindFragment"
+        android:name="com.ths.tradingai.ui.BindFragment"
+        android:label="绑定" />
+
+    <fragment
+        android:id="@+id/accountFragment"
+        android:name="com.ths.tradingai.ui.AccountFragment"
+        android:label="账户" />
+
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="com.ths.tradingai.ui.ChatFragment"
+        android:label="AI聊天" />
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.ths.tradingai.ui.SettingsFragment"
+        android:label="设置" />
+
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.ths.tradingai.ui.NotificationFragment"
+        android:label="通知" />
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.ths.tradingai.ui.ProfileFragment"
+        android:label="我的" />
+
+</navigation>
